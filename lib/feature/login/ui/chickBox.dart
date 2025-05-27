@@ -14,6 +14,7 @@ class _ChickBoxState extends State<ChickBox> {
 
   @override
   Widget build(BuildContext context) {
+    // ignore: avoid_unnecessary_containers
     return Container(
       child: Row(
         children: [
@@ -29,7 +30,7 @@ class _ChickBoxState extends State<ChickBox> {
             "Remember password",
             style: TextStyle(fontSize: 13.sp, fontWeight: FontWeight.w400),
           ),
-          Spacer(),
+          const Spacer(),
           TextButton(
             onPressed: () {},
             child: Text(

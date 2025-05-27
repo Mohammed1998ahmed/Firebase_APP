@@ -13,6 +13,7 @@ class ElevatedButtonWidght extends StatelessWidget {
     this.vertical,
     this.radius,
     this.name,
+    this.fontSize,
   });
   final void Function()? onPressed;
   final Color? backgroundColor;
@@ -21,6 +22,7 @@ class ElevatedButtonWidght extends StatelessWidget {
   final double? vertical;
   final double? radius;
   final String? name;
+  final double? fontSize;
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
@@ -41,7 +43,7 @@ class ElevatedButtonWidght extends StatelessWidget {
       child: Text(
         name ?? "Login",
         style: TextStyle(
-          fontSize: 18, // تعديل حجم الخط
+          fontSize: fontSize ?? 18, // تعديل حجم الخط
           fontWeight: FontWeight.bold, // تعديل سمك الخط
         ),
       ),

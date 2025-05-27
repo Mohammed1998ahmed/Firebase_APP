@@ -11,45 +11,47 @@ class Top_AppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SpacerWidght(
-          height: 50.h,
+        Container(
+          width: 320.w,
+          height: 115,
+          decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage("assets/images/Rectangle.png"),
+                  fit: BoxFit.cover)),
         ),
+        SpacerWidght(height: 6.h),
         Container(
           alignment: Alignment.center,
           child: Text(
-            "Login",
+            "Welcame",
             style: TextStyle(
                 color: ColorsApp.main_Color_Black,
                 fontWeight: FontWeight.w400,
-                fontSize: 40.sp),
+                fontSize: 30.sp),
           ),
         ),
-        SpacerWidght(height: 14.h),
-        // ignore: sized_box_for_whitespace
+        SpacerWidght(height: 6.h),
         Container(
           width: 233.w,
-          height: 72.h,
+          height: 50.h,
           child: RichText(
             textAlign: TextAlign.center,
             text: TextSpan(
               // النمط الأساسي
               children: [
                 TextSpan(
-                    text: "By signing in you are agreeing \n \nour ",
+                    text: "By signing in you are agreeing our ",
                     style: TextStyle(
                         fontWeight: FontWeight.w400,
                         color: ColorsApp.three_Text_Color_Black,
-                        fontSize: 16.sp)),
+                        fontSize: 17.sp)),
                 TextSpan(
                     text: " Term and privacy policy",
                     style: TextStyle(
-                        color: ColorsApp.main_Color_Blue, fontSize: 16.sp)),
+                        color: ColorsApp.main_Color_Blue, fontSize: 17.sp)),
               ],
             ),
           ),
-        ),
-        SpacerWidght(
-          height: 30.h,
         ),
       ],
     );

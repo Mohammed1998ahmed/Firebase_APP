@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import '../../../core/theme/colors.dart';
 import '../../../core/widght/circalarSignIn.dart';
 
-class SignInOther extends StatelessWidget {
-  const SignInOther({
+class SignInByOther extends StatelessWidget {
+  const SignInByOther({
     super.key,
   });
 

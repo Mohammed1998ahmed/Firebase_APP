@@ -1,4 +1,7 @@
+import 'package:firebase_app/core/helper/extension.dart';
+import 'package:firebase_app/core/router/routes.dart';
 import 'package:firebase_app/core/theme/colors.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -11,6 +14,7 @@ class Select_SignIn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // ignore: sized_box_for_whitespace
     return Container(
       height: 35.h,
       width: ScreenUtil().screenWidth,
@@ -19,6 +23,7 @@ class Select_SignIn extends StatelessWidget {
         children: [
           Column(
             children: [
+              // ignore: avoid_unnecessary_containers
               Container(
                 child: Text(
                   "Login",
@@ -41,13 +46,19 @@ class Select_SignIn extends StatelessWidget {
           SpacerWidght(
             width: 30.w,
           ),
-          Container(
-            child: Text(
-              "Register",
-              style: TextStyle(
-                  color: ColorsApp.second_Text_Color_Black,
-                  fontWeight: FontWeight.w400,
-                  fontSize: 20.sp),
+          // ignore: avoid_unnecessary_containers
+          GestureDetector(
+            onTap: () {
+              context.pushNamed(Routes.register_page);
+            },
+            child: Container(
+              child: Text(
+                "Register",
+                style: TextStyle(
+                    color: ColorsApp.second_Text_Color_Black,
+                    fontWeight: FontWeight.w400,
+                    fontSize: 20.sp),
+              ),
             ),
           ),
         ],

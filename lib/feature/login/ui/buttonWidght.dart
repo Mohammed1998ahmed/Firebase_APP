@@ -12,6 +12,7 @@ class ButtonWidght extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
+        // ignore: sized_box_for_whitespace
         Container(
           width: ScreenUtil().screenWidth,
           height: 219.5.h,
@@ -23,7 +24,7 @@ class ButtonWidght extends StatelessWidget {
             alignment: Alignment.center,
             width: 300.w,
             height: 219.h,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
                 image: DecorationImage(
                     image: AssetImage("assets/images/buttom.png"))),
           ),
@@ -49,7 +50,7 @@ class ButtonWidght extends StatelessWidget {
               borderRadius: BorderRadius.circular(5),
               color: ColorsApp.four_Color_Blue,
             ),
-            child: Icon(
+            child: const Icon(
               Icons.fingerprint,
               color: ColorsApp.colors1_Contanir,
               size: 50,

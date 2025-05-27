@@ -11,16 +11,20 @@ class TextfromFieldWidght extends StatelessWidget {
     this.controller,
     this.suffixIcon,
     this.icons,
+    this.validator,
   });
   final String? hintText;
   final TextStyle? hintStyle;
   final TextEditingController? controller;
   final Widget? suffixIcon;
   final IconData? icons;
+  final String? Function(String?)? validator;
+
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
+      validator: validator ?? null,
       decoration: InputDecoration(
           prefixIcon: Icon(
             icons ?? Icons.email_outlined,
