@@ -2,8 +2,8 @@ import 'package:firebase_app/core/router/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../feature/login/ui/login.dart';
-import '../../feature/register/ui/register.dart';
+import '../../feature/login/login.dart';
+import '../../feature/register/register.dart';
 
 class App_Route {
   Route generatorRoute(RouteSettings settings) {

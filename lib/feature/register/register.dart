@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../core/widght/circalarSignIn.dart';
+import '../../core/widght/circalarSignIn.dart';
 
 class Register extends StatefulWidget {
   const Register({super.key});
