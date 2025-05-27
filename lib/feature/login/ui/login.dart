@@ -1,9 +1,7 @@
 import 'package:firebase_app/core/theme/colors.dart';
 import 'package:firebase_app/core/widght/Spacer.dart';
 import 'package:firebase_app/core/widght/circalarSignIn.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class Login extends StatefulWidget {
@@ -115,7 +113,7 @@ class _LoginState extends State<Login> {
                   ),
                   TextFormField(
                     decoration: InputDecoration(
-                        prefixIcon: Icon(
+                        prefixIcon: const Icon(
                           Icons.email_outlined,
                           color: ColorsApp.second_Text_Color_Black,
                           size: 30,
@@ -126,17 +124,17 @@ class _LoginState extends State<Login> {
                             fontWeight: FontWeight.w400,
                             fontSize: 18.sp)),
                   ),
-                  SpacerWidght(
+                  const SpacerWidght(
                     height: 25,
                   ),
                   TextFormField(
                     decoration: InputDecoration(
-                        suffixIcon: Icon(
+                        suffixIcon: const Icon(
                           Icons.remove_red_eye_outlined,
                           color: ColorsApp.second_Text_Color_Black,
                           size: 30,
                         ),
-                        prefixIcon: Icon(
+                        prefixIcon: const Icon(
                           Icons.lock_outline_rounded,
                           color: ColorsApp.second_Text_Color_Black,
                           size: 30,
@@ -218,7 +216,7 @@ class _LoginState extends State<Login> {
                   SpacerWidght(
                     height: 13.h,
                   ),
-                  Row(
+                  const Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       CircularWidght(

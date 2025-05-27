@@ -3,18 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../feature/login/ui/login.dart';
+import '../../feature/register/ui/register.dart';
 
 class App_Route {
   Route generatorRoute(RouteSettings settings) {
     switch (settings.name) {
       case Routes.login_page:
         return MaterialPageRoute(builder: (_) => Login());
-      // case Routes.register_page:
-      //   return MaterialPageRoute(
-      //       builder: (_) => BlocProvider(
-      //             create: (context) => RegisterCubit(),
-      //             child: Register(),
-      //           ));
+      case Routes.register_page:
+        return MaterialPageRoute(
+          builder: (_) => Register(),
+        );
       // case Routes.home_page:
       //   return MaterialPageRoute(builder: (_) => NavBar_Button());
       default:

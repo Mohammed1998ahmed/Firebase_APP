@@ -9,6 +9,8 @@ class ColorsApp {
   static const Color main_Color_Black = Color(0xFF000000);
   static const Color second_Text_Color_Black = Color(0xffA6A6A6);
   static const Color three_Text_Color_Black = Color(0xff747070);
+  static const Color four_Text_Color_Black = Color(0xffC4C4C4);
+  static const Color fief_Text_Color_Black = Color(0xffF9F9F9);
 
   static const Color colors1_Contanir = Color(0xffffffff);
   static const Color colors2_Contanir = Color(0xC4FFFFFF);
