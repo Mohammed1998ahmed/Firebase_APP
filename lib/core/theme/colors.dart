@@ -5,6 +5,7 @@ class ColorsApp {
   static const Color Second_Color_Blue = Color(0xff247CFF);
   static const Color three_Color_Blue = Color(0xff469FD1);
   static const Color four_Color_Blue = Color(0xff0386D0);
+  static const Color sax_Color_Blue = Color(0x1F036AB9);
 
   static const Color main_Color_Black = Color(0xFF000000);
   static const Color second_Text_Color_Black = Color(0xffA6A6A6);
