@@ -1,4 +1,5 @@
 import 'package:firebase_app/core/router/routes.dart';
+import 'package:firebase_app/feature/home/home.dart';
 import 'package:firebase_app/feature/login/logic/cubit/login_cubit.dart';
 import 'package:firebase_app/feature/register/logic/cubit/register_cubit.dart';
 import 'package:flutter/material.dart';
@@ -24,8 +25,8 @@ class App_Route {
             child: Register(),
           ),
         );
-      // case Routes.home_page:
-      //   return MaterialPageRoute(builder: (_) => NavBar_Button());
+      case Routes.home_page:
+        return MaterialPageRoute(builder: (_) => Home());
       default:
         return MaterialPageRoute(
             builder: (_) => Scaffold(

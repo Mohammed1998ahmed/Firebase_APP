@@ -22,7 +22,7 @@ class App_Root extends StatelessWidget {
           scaffoldBackgroundColor: Colors.white,
         ),
         // home: child,
-        initialRoute: Routes.login_page,
+        initialRoute: Routes.home_page,
         onGenerateRoute: app_route.generatorRoute,
       ),
     );

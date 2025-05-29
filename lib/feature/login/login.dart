@@ -42,14 +42,15 @@ class Login extends StatelessWidget {
                           height: 20.h,
                         ),
                         TextfromFieldWidght(
+                          controller: cubit.controller_email,
                           validator: (String? value) {
                             if (value == null || value.isEmpty) {
-                              return 'يرجى إدخال البريد الإلكتروني';
+                              return "Please enter your email.";
                             }
                             // تحقق من صحة البريد الإلكتروني
                             final emailRegex = RegExp(r'^[^@]+@[^@]+\.[^@]+');
                             if (!emailRegex.hasMatch(value)) {
-                              return 'البريد الإلكتروني غير صحيح';
+                              return "Please enter your email.";
                             }
                             return null;
                           },
@@ -58,6 +59,7 @@ class Login extends StatelessWidget {
                           height: 25,
                         ),
                         TextfromFieldWidght(
+                          controller: cubit.controller_password,
                           hintText: "Password",
                           validator: (String? value) {
                             if (value == null || value.isEmpty) {
@@ -85,9 +87,10 @@ class Login extends StatelessWidget {
                         ElevatedButtonWidght(
                           onPressed: () {
                             if (cubit.formKey.currentState!.validate()) {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(content: Text('تم التحقق بنجاح')),
-                              );
+                              cubit.signInWithEmailAndPassword(
+                                  email: cubit.controller_email.text,
+                                  password: cubit.controller_password.text,
+                                  context: context);
                             }
                           },
                         ),

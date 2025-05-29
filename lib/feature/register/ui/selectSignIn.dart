@@ -20,9 +20,10 @@ class SelectSignIn extends StatelessWidget {
         ElevatedButtonWidght(
           onPressed: () {
             if (registerCubit.formKey.currentState!.validate()) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text('تم التحقق بنجاح')),
-              );
+              registerCubit.signInWithEmailAndPassword(
+                  email: registerCubit.controller_email.text,
+                  password: registerCubit.controller_password.text,
+                  context: context);
             }
           },
           horizontal: 50.w,
@@ -36,11 +37,10 @@ class SelectSignIn extends StatelessWidget {
         ElevatedButtonWidght(
           onPressed: () {
             if (registerCubit.formKey.currentState!.validate()) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text('تم التحقق بنجاح')),
-              );
-            }
-            if (registerCubit.formKey.currentState!.validate()) {
+              registerCubit.createUserWithEmailAndPassword(
+                  email: registerCubit.controller_email.text,
+                  password: registerCubit.controller_password.text,
+                  context: context);
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(content: Text('تم التحقق بنجاح')),
               );

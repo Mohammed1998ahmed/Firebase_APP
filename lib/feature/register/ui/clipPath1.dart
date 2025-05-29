@@ -8,18 +8,10 @@ import '../../../core/widght/textFromFieldRegister.dart';
 import 'chickBox.dart';
 import 'top_AppBar.dart';
 
-class ClipPath1 extends StatefulWidget {
-  const ClipPath1({
-    super.key,
-    required this.registerCubit,
-  });
+class ClipPath1 extends StatelessWidget {
   final RegisterCubit registerCubit;
 
-  @override
-  State<ClipPath1> createState() => _ClipPath1State();
-}
-
-class _ClipPath1State extends State<ClipPath1> {
+  const ClipPath1({super.key, required this.registerCubit});
   String? validateEmail(String? value) {
     if (value == null || value.isEmpty) {
       return 'يرجى إدخال البريد الإلكتروني';
@@ -45,7 +37,7 @@ class _ClipPath1State extends State<ClipPath1> {
                 topLeft: Radius.circular(10.0),
                 topRight: Radius.circular(10.0))),
         child: Form(
-          key: widget.registerCubit.formKey,
+          key: registerCubit.formKey,
           child: SingleChildScrollView(
             child: Column(
               children: [
@@ -57,26 +49,25 @@ class _ClipPath1State extends State<ClipPath1> {
                   height: 5.h,
                 ),
                 TextFromFieldWidght(
-                  height: widget.registerCubit.valdatorTextEmail ? 80.h : 50.h,
+                  controller: registerCubit.controller_email,
+                  height: registerCubit.valdatorTextEmail ? 80.h : 50.h,
                   keyboardType: TextInputType.emailAddress,
                   validator: (String? value) {
                     if (value == null || value.isEmpty) {
-                      setState(() {
-                        widget.registerCubit.chaingeBoolean_EmailT();
-                      });
+                      registerCubit.chaingeBoolean_EmailT();
+
                       return "Please enter your email.";
                     }
                     // تحقق من صحة البريد الإلكتروني
                     final emailRegex = RegExp(r'^[^@]+@[^@]+\.[^@]+');
                     if (!emailRegex.hasMatch(value)) {
-                      setState(() {
-                        widget.registerCubit.chaingeBoolean_EmailT();
-                      });
+                      registerCubit.chaingeBoolean_EmailT();
+
                       return "The email is invalid.";
                     }
-                    setState(() {
-                      widget.registerCubit.chaingeBoolean_EmailF();
-                    });
+
+                    registerCubit.chaingeBoolean_EmailF();
+
                     return null;
                   },
                 ),
@@ -84,26 +75,24 @@ class _ClipPath1State extends State<ClipPath1> {
                   height: 20.h,
                 ),
                 TextFromFieldWidght(
-                  height:
-                      widget.registerCubit.valdatorTextPassword ? 80.h : 50.h,
+                  controller: registerCubit.controller_password,
+                  height: registerCubit.valdatorTextPassword ? 80.h : 50.h,
                   hintText: "Password",
                   iconsuffix: Icons.remove_red_eye_outlined,
                   validator: (String? value) {
                     if (value == null || value.isEmpty) {
-                      setState(() {
-                        widget.registerCubit.chaingeBoolean_PasswprdT();
-                      });
+                      registerCubit.chaingeBoolean_PasswprdT();
+
                       return "Please enter your password.";
                     }
                     if (value.length < 6) {
-                      setState(() {
-                        widget.registerCubit.chaingeBoolean_PasswprdT();
-                      });
+                      registerCubit.chaingeBoolean_PasswprdT();
+
                       return "Password must be at least 6 characters long.";
                     }
-                    setState(() {
-                      widget.registerCubit.chaingeBoolean_PasswordF();
-                    });
+
+                    registerCubit.chaingeBoolean_PasswordF();
+
                     return null;
                   },
                 ),
