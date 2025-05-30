@@ -1,7 +1,6 @@
 import 'package:firebase_app/core/widght/ButtonWidght.dart';
 import 'package:firebase_app/core/widght/Spacer.dart';
 import 'package:firebase_app/core/widght/textFromFieldRegister.dart';
-import 'package:firebase_app/notify.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_tts/flutter_tts.dart';
@@ -86,8 +85,8 @@ class _HomeState extends State<Home> {
           ),
           ElevatedButtonWidght(
             onPressed: () async {
-              await Notify.scheduleNotification(time: selectedTime);
-              Notify.showTestNotification();
+              // await Notify.scheduleNotification(time: selectedTime);
+              // Notify.showTestNotification();
             },
           ),
           Center(
