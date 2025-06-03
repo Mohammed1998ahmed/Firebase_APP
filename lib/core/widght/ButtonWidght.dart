@@ -14,6 +14,7 @@ class ElevatedButtonWidght extends StatelessWidget {
     this.radius,
     this.name,
     this.fontSize,
+    this.width,
   });
   final void Function()? onPressed;
   final Color? backgroundColor;
@@ -23,6 +24,7 @@ class ElevatedButtonWidght extends StatelessWidget {
   final double? radius;
   final String? name;
   final double? fontSize;
+  final double? width;
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
@@ -33,18 +35,21 @@ class ElevatedButtonWidght extends StatelessWidget {
         foregroundColor:
             foregroundColor ?? ColorsApp.colors1_Contanir, // تغيير لون النص
         padding: EdgeInsets.symmetric(
-            horizontal: horizontal ?? 135.w,
+            horizontal: horizontal ?? 100.w,
             vertical: vertical ?? 15.h), // تعديل الأبعاد
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(radius ?? 10), // تعديل الحواف
         ),
         elevation: 5, // تعديل الظل والارتفاع
       ),
-      child: Text(
-        name ?? "Login",
-        style: TextStyle(
-          fontSize: fontSize ?? 18, // تعديل حجم الخط
-          fontWeight: FontWeight.bold, // تعديل سمك الخط
+      child: Container(
+        width: width ?? 250.w,
+        child: Text(
+          name ?? "تسجيل الدخول",
+          style: TextStyle(
+            fontSize: fontSize ?? 18, // تعديل حجم الخط
+            fontWeight: FontWeight.bold, // تعديل سمك الخط
+          ),
         ),
       ),
     );

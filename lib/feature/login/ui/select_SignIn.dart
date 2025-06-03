@@ -26,7 +26,7 @@ class Select_SignIn extends StatelessWidget {
               // ignore: avoid_unnecessary_containers
               Container(
                 child: Text(
-                  "Login",
+                  "تسجيل الدخول",
                   style: TextStyle(
                       color: ColorsApp.main_Color_Blue,
                       fontWeight: FontWeight.w400,
@@ -53,7 +53,7 @@ class Select_SignIn extends StatelessWidget {
             },
             child: Container(
               child: Text(
-                "Register",
+                "انشاء حساب",
                 style: TextStyle(
                     color: ColorsApp.second_Text_Color_Black,
                     fontWeight: FontWeight.w400,

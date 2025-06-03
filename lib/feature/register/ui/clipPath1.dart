@@ -56,14 +56,14 @@ class ClipPath1 extends StatelessWidget {
                     if (value == null || value.isEmpty) {
                       registerCubit.chaingeBoolean_EmailT();
 
-                      return "Please enter your email.";
+                      return "الرجاء إدخال بريدك الإلكتروني.";
                     }
                     // تحقق من صحة البريد الإلكتروني
                     final emailRegex = RegExp(r'^[^@]+@[^@]+\.[^@]+');
                     if (!emailRegex.hasMatch(value)) {
                       registerCubit.chaingeBoolean_EmailT();
 
-                      return "The email is invalid.";
+                      return "البريد الإلكتروني غير صالح.";
                     }
 
                     registerCubit.chaingeBoolean_EmailF();
@@ -77,18 +77,18 @@ class ClipPath1 extends StatelessWidget {
                 TextFromFieldWidght(
                   controller: registerCubit.controller_password,
                   height: registerCubit.valdatorTextPassword ? 80.h : 50.h,
-                  hintText: "Password",
+                  hintText: "كلمة المرور",
                   iconsuffix: Icons.remove_red_eye_outlined,
                   validator: (String? value) {
                     if (value == null || value.isEmpty) {
                       registerCubit.chaingeBoolean_PasswprdT();
 
-                      return "Please enter your password.";
+                      return "الرجاء إدخال كلمة المرور الخاصة بك.";
                     }
                     if (value.length < 6) {
                       registerCubit.chaingeBoolean_PasswprdT();
 
-                      return "Password must be at least 6 characters long.";
+                      return "يجب أن تتكون كلمة المرور من 6 أحرف على الأقل.";
                     }
 
                     registerCubit.chaingeBoolean_PasswordF();

@@ -14,10 +14,11 @@ class Forgot_Password extends StatelessWidget {
         TextButton(
           onPressed: () {},
           child: Text(
-            "Forgot Password",
-            style: TextStyle(fontSize: 13.sp, fontWeight: FontWeight.w500),
+            "هل نسيت كلمة السر",
+            style: TextStyle(fontSize: 13.sp, fontWeight: FontWeight.w600),
           ),
-        )
+        ),
+        Spacer()
       ],
     );
   }

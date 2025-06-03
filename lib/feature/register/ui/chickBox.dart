@@ -19,6 +19,7 @@ class _ChickBoxRState extends State<ChickBoxR> {
       child: Container(
         child: Row(
           children: [
+            Spacer(),
             Checkbox(
               value: isChecked,
               onChanged: (bool? newValue) {
@@ -28,9 +29,10 @@ class _ChickBoxRState extends State<ChickBoxR> {
               },
             ),
             Text(
-              "Remember password",
+              "تذكر كلمة المرور",
               style: TextStyle(fontSize: 13.sp, fontWeight: FontWeight.w400),
             ),
+            Spacer()
           ],
         ),
       ),

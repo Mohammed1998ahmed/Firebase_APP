@@ -12,6 +12,7 @@ class TextfromFieldWidght extends StatelessWidget {
     this.suffixIcon,
     this.icons,
     this.validator,
+    this.keyboardType,
   });
   final String? hintText;
   final TextStyle? hintStyle;
@@ -19,12 +20,13 @@ class TextfromFieldWidght extends StatelessWidget {
   final Widget? suffixIcon;
   final IconData? icons;
   final String? Function(String?)? validator;
-
+  final TextInputType? keyboardType;
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
       validator: validator ?? null,
+      keyboardType: keyboardType,
       decoration: InputDecoration(
           prefixIcon: Icon(
             icons ?? Icons.email_outlined,
@@ -32,7 +34,7 @@ class TextfromFieldWidght extends StatelessWidget {
             size: 30,
           ),
           suffixIcon: suffixIcon ?? null,
-          hintText: hintText ?? "Email Address",
+          hintText: hintText ?? "عنوان البريد الإلكتروني",
           hintStyle: TextStyle(
               color: ColorsApp.second_Text_Color_Black,
               fontWeight: FontWeight.w400,

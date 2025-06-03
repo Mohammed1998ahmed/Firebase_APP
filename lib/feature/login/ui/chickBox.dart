@@ -27,14 +27,14 @@ class _ChickBoxState extends State<ChickBox> {
             },
           ),
           Text(
-            "Remember password",
+            "تذكر كلمة المرور",
             style: TextStyle(fontSize: 13.sp, fontWeight: FontWeight.w400),
           ),
           const Spacer(),
           TextButton(
             onPressed: () {},
             child: Text(
-              "Forgot Password",
+              "هل نسيت كلمة السر",
               style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w400),
             ),
           )

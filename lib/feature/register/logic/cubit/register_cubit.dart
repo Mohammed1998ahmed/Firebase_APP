@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../core/helper/shared_phreferance.dart';
 import '../../../../core/router/routes.dart';
 
 part 'register_state.dart';
@@ -40,6 +41,8 @@ class RegisterCubit extends Cubit<RegisterState> {
       {required String email,
       required String password,
       required BuildContext context}) async {
+    emit(RegisterLoading());
+
     try {
       // ignore: unused_local_variable
       final credential =
@@ -47,6 +50,10 @@ class RegisterCubit extends Cubit<RegisterState> {
         email: email,
         password: password,
       );
+
+      SharedPreferencesService().setBool(key: "user", value: true);
+      emit(RegisterSecces());
+
       context.pushNamed(Routes.home_page);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
@@ -60,6 +67,7 @@ class RegisterCubit extends Cubit<RegisterState> {
           SnackBar(content: Text('he account already exists for that email.')),
         );
       }
+      emit(RegisterError());
     } catch (e) {
       print(e);
     }
@@ -69,11 +77,15 @@ class RegisterCubit extends Cubit<RegisterState> {
       {required String email,
       required String password,
       required BuildContext context}) async {
+    emit(RegisterLoading_Login());
     try {
       final credential = await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
       // الحصول على UID الخاص بالمستخدم
       String userId = credential.user!.uid;
+      SharedPreferencesService().setBool(key: "user", value: true);
+      emit(RegisterSecces_Login());
+
       print("User ID*****************************: $userId");
       context.pushNamed(Routes.home_page);
     } on FirebaseAuthException catch (e) {
@@ -88,6 +100,7 @@ class RegisterCubit extends Cubit<RegisterState> {
         );
         print('Wrong password provided for that user.');
       }
+      emit(RegisterError_Login());
     }
   }
 }

@@ -1,10 +1,9 @@
-import 'dart:async';
-
 import 'package:firebase_app/core/helper/extension.dart';
+import 'package:firebase_app/core/helper/shared_phreferance.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../../../core/router/routes.dart';
-import '../../../notify.dart';
 
 class topAppBar extends StatelessWidget {
   const topAppBar({
@@ -26,13 +25,24 @@ class topAppBar extends StatelessWidget {
       actions: [
         IconButton(
             onPressed: () async {
-              await Notify.checkAndNotifyFromFirebase();
-              Timer.periodic(Duration(minutes: 1), (timer) {
-                Notify.checkAndNotifyFromFirebase();
-              });
+              try {
+                context.pushReplacementNamed(Routes.login_page);
+                await FirebaseAuth.instance.signOut();
+                SharedPreferencesService().setBool(key: "user", value: false);
+                print('تم تسجيل الخروج بنجاح');
+              } catch (e) {
+                print('حدث خطأ أثناء تسجيل الخروج: $e');
+              }
             },
+            // () {
+            //   print("************************");
+            //   // await Notify.checkAndNotifyFromFirebase();
+            //   // Timer.periodic(Duration(minutes: 1), (timer) {
+            //   //   Notify.checkAndNotifyFromFirebase();
+            //   // });
+            // },
             icon: Icon(
-              Icons.settings,
+              Icons.logout,
               size: 30,
             ))
       ],

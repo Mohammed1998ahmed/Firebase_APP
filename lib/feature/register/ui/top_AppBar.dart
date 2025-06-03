@@ -13,17 +13,17 @@ class Top_AppBar extends StatelessWidget {
       children: [
         Container(
           width: 320.w,
-          height: 115,
+          height: 100,
           decoration: BoxDecoration(
               image: DecorationImage(
                   image: AssetImage("assets/images/Rectangle.png"),
-                  fit: BoxFit.cover)),
+                  fit: BoxFit.contain)),
         ),
         SpacerWidght(height: 6.h),
         Container(
           alignment: Alignment.center,
           child: Text(
-            "Welcame",
+            "مرحباً",
             style: TextStyle(
                 color: ColorsApp.main_Color_Black,
                 fontWeight: FontWeight.w400,
@@ -33,20 +33,20 @@ class Top_AppBar extends StatelessWidget {
         SpacerWidght(height: 6.h),
         Container(
           width: 233.w,
-          height: 50.h,
+          height: 60.h,
           child: RichText(
             textAlign: TextAlign.center,
             text: TextSpan(
               // النمط الأساسي
               children: [
                 TextSpan(
-                    text: "By signing in you are agreeing our ",
+                    text: "من خلال تسجيل الدخول فإنك توافق على شروطنا",
                     style: TextStyle(
                         fontWeight: FontWeight.w400,
                         color: ColorsApp.three_Text_Color_Black,
                         fontSize: 17.sp)),
                 TextSpan(
-                    text: " Term and privacy policy",
+                    text: " الشروط وسياسة الخصوصية",
                     style: TextStyle(
                         color: ColorsApp.main_Color_Blue, fontSize: 17.sp)),
               ],

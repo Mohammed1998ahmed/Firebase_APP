@@ -1,3 +1,4 @@
+import 'package:firebase_app/core/helper/shared_phreferance.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -27,7 +28,9 @@ class App_Root extends StatelessWidget {
             child: child!,
           );
         },
-        initialRoute: Routes.medicineAnimationScreen_page,
+        initialRoute: SharedPreferencesService().getBool(key: "user") == true
+            ? Routes.home_page
+            : Routes.medicineAnimationScreen_page,
         onGenerateRoute: app_route.generatorRoute,
       ),
     );

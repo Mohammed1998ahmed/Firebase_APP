@@ -1,5 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_app/core/router/routes.dart';
 import 'package:firebase_app/feature/add_medication/logic/cubit/add_medication_cubit.dart';
+import 'package:firebase_app/notify.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
@@ -20,7 +23,7 @@ class AddMedicationScreen extends StatefulWidget {
 
 class _AddMedicationScreenState extends State<AddMedicationScreen> {
   Color get primaryColor => Colors.blue.shade800;
-
+  final user = FirebaseAuth.instance.currentUser;
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AddMedicationCubit, AddMedicationState>(
@@ -29,6 +32,7 @@ class _AddMedicationScreenState extends State<AddMedicationScreen> {
       },
       builder: (context, state) {
         final cubti = AddMedicationCubit.getObject(context);
+
         return Scaffold(
           appBar: appBarWidght(),
           backgroundColor: Colors.grey.shade100,
@@ -149,31 +153,58 @@ class _AddMedicationScreenState extends State<AddMedicationScreen> {
                         if (cubti.formKey.currentState?.validate() ?? false) {
                           // TODO: save to Firebase
                           try {
-                            final data = {
-                              'name': cubti.nameCtrl.text.trim(),
-                              'notes': cubti.notesCtrl.text.trim(),
-                              'intakeType': cubti.intakeType,
-                              'dosePerDay': cubti.dosePerDay,
-                              'quantityPerDose': cubti.quantityPerDose,
-                              'doseTimes': cubti.doseTimes
-                                  .map((t) =>
-                                      '${t.hour.toString().padLeft(2, '0')}:${t.minute.toString().padLeft(2, '0')}')
-                                  .toList(),
-                              'startDate': DateFormat('yyyy-MM-dd')
-                                  .format(cubti.startDate),
-                              'endDate': DateFormat('yyyy-MM-dd')
-                                  .format(cubti.endDate),
-                              'createdAt': FieldValue.serverTimestamp(),
-                            };
+                            if (user == null) {
+                              // لم يتم تسجيل الدخول
+                              showDialog(
+                                context: context,
+                                builder: (_) => AlertDialog(
+                                  title: Text('تسجيل الدخول مطلوب'),
+                                  content: Text(
+                                      'يرجى تسجيل الدخول أولاً لإضافة دواء.'),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.pushNamed(
+                                            context, Routes.login_page);
+                                      },
+                                      child: Text('تسجيل الدخول'),
+                                    )
+                                  ],
+                                ),
+                              );
+                            } else {
+                              // السماح بإضافة الدواء وربط user.uid مثلاً
 
-                            await FirebaseFirestore.instance
-                                .collection('medications')
-                                .add(data);
-
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                  content: Text('تم حفظ الدواء في Firebase')),
-                            );
+                              final data = {
+                                'name': cubti.nameCtrl.text.trim(),
+                                'notes': cubti.notesCtrl.text.trim(),
+                                'intakeType': cubti.intakeType,
+                                'dosePerDay': cubti.dosePerDay,
+                                'quantityPerDose': cubti.quantityPerDose,
+                                'doseTimes': cubti.doseTimes
+                                    .map((t) =>
+                                        '${t.hour.toString().padLeft(2, '0')}:${t.minute.toString().padLeft(2, '0')}')
+                                    .toList(),
+                                'startDate': DateFormat('yyyy-MM-dd')
+                                    .format(cubti.startDate),
+                                'endDate': DateFormat('yyyy-MM-dd')
+                                    .format(cubti.endDate),
+                                'userId': user!.uid,
+                                'createdAt': FieldValue.serverTimestamp(),
+                              };
+                              await FirebaseFirestore.instance
+                                  .collection('medications')
+                                  .add(data);
+                              await Notify
+                                  .scheduleAllNotificationsFromFirebase();
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                    content: Text('تم حفظ الدواء في Firebase')),
+                              );
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(content: Text('تم حفظ الدواء بنجاح!')),
+                              );
+                            }
 
                             // Navigator.pop(context); // الرجوع بعد الحفظ
                           } catch (e) {
@@ -182,9 +213,7 @@ class _AddMedicationScreenState extends State<AddMedicationScreen> {
                               SnackBar(content: Text('حدث خطأ أثناء الحفظ')),
                             );
                           }
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text('تم حفظ الدواء بنجاح!')),
-                          );
+
                           Navigator.pop(context);
                         }
                       },

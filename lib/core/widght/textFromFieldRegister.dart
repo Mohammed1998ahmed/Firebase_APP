@@ -56,7 +56,7 @@ class TextFromFieldWidght extends StatelessWidget {
                     borderSide: BorderSide(
                         color: colorBorder ?? ColorsApp.four_Text_Color_Black),
                   ),
-                  hintText: hintText ?? "Email Addres",
+                  hintText: hintText ?? "عنوان البريد الإلكتروني",
                   hintTextDirection: TextDirection.ltr,
                   hintStyle: hintStyle ??
                       TextStyle(

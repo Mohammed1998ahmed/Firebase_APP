@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:firebase_app/core/helper/extension.dart';
+import 'package:firebase_app/core/helper/shared_phreferance.dart';
 import 'package:firebase_app/core/router/routes.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -42,12 +43,16 @@ class LoginCubit extends Cubit<LoginState> {
       {required String email,
       required String password,
       required BuildContext context}) async {
+    emit(LoginLoading());
     try {
       final credential = await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
       // الحصول على UID الخاص بالمستخدم
       String userId = credential.user!.uid;
       print("User ID*****************************: $userId");
+      emit(LoginSecces());
+
+      SharedPreferencesService().setBool(key: "user", value: true);
       context.pushNamed(Routes.home_page);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
@@ -61,6 +66,7 @@ class LoginCubit extends Cubit<LoginState> {
         );
         print('Wrong password provided for that user.');
       }
+      emit(LoginError());
     }
   }
 }
