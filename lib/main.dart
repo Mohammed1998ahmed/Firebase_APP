@@ -1,125 +1,142 @@
+import 'package:bloc/bloc.dart';
+import 'package:firebase_app/appRouters.dart';
+import 'package:firebase_app/core/helper/bolc_services.dart';
+import 'package:firebase_app/core/helper/shared_phreferance.dart';
+import 'package:firebase_app/notify.dart';
+// import 'package:firebase_app/notify.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:permission_handler/permission_handler.dart';
+// import 'package:workmanager/workmanager.dart';
+import 'core/router/app_Route.dart';
+// import 'package:timezone/data/latest.dart' as tz;
+// import 'package:timezone/timezone.dart' as tz;
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  SharedPreferencesService().init();
+
+  await Firebase.initializeApp();
+  Bloc.observer = MyBlocObserver();
+  // initializeNotifications();
+
+  await Permission.notification.request();
+  // initializeTimeZone();
+  await Notify.initializeNotifications();
+  await Notify.testNotification();
+  // await Notify.showInstantNotification();
+
+  // إذا التطبيق مفتوح، نتحقق كل دقيقة
+  // Timer.periodic(Duration(minutes: 1), (timer) {
+  //   Notify.checkAndNotifyFromFirebase();
+  // });
+
+  // // إذا التطبيق بالخلفية، نستخدم Workmanager
+  // await Workmanager().initialize(callbackDispatcher, isInDebugMode: false);
+  // await Workmanager().registerPeriodicTask(
+  //   "med_check_task", // معرف المهمة
+  //   "med_check_task",
+  //   frequency: Duration(minutes: 15), // أقل وقت مسموح
+  //   initialDelay: Duration(seconds: 10),
+  //   constraints: Constraints(
+  //     networkType: NetworkType.connected,
+  //   ),
+  // );
+
+  runApp(App_Root(
+    app_route: App_Route(),
+  ));
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+// void initializeTimeZone() {
+//   tz.initializeTimeZones();
+//   tz.setLocalLocation(
+//       tz.getLocation('Asia/Damascus')); // استبدل بالمنطقة الزمنية المناسبة
+// }
+// import 'package:flutter/material.dart';
+// import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+// import 'package:timezone/data/latest.dart' as tz;
+// import 'package:timezone/timezone.dart' as tz;
+// import 'package:permission_handler/permission_handler.dart';
 
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a purple toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
-    );
-  }
-}
+// final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+//     FlutterLocalNotificationsPlugin();
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+// Future<void> main() async {
+//   WidgetsFlutterBinding.ensureInitialized();
+//   await initializeNotifications();
+//   runApp(const MyApp());
+// }
 
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
+// Future<void> initializeNotifications() async {
+//   // 🧭 تهيئة المنطقة الزمنية
+//   tz.initializeTimeZones();
+//   tz.setLocalLocation(tz.getLocation('Asia/Damascus'));
 
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
+//   // 🛡️ طلب صلاحية الإشعارات
+//   await Permission.notification.request();
 
-  final String title;
+//   const androidInit = AndroidInitializationSettings('@mipmap/ic_launcher');
+//   const initSettings = InitializationSettings(android: androidInit);
 
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
+//   await flutterLocalNotificationsPlugin.initialize(initSettings);
+// }
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+// class MyApp extends StatelessWidget {
+//   const MyApp({super.key});
 
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       title: 'تجربة إشعار مؤقت',
+//       home: const MyHomePage(),
+//       debugShowCheckedModeBanner: false,
+//     );
+//   }
+// }
 
-  @override
-  Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
-    return Scaffold(
-      appBar: AppBar(
-        // TRY THIS: Try changing the color here to a specific color (to
-        // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
-        // change color while the other colors stay the same.
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          //
-          // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
-          // action in the IDE, or press "p" in the console), to see the
-          // wireframe for each widget.
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
-    );
-  }
-}
+// class MyHomePage extends StatelessWidget {
+//   const MyHomePage({super.key});
+
+//   void _scheduleNotification() async {
+//     // final now = DateTime.now();
+//     // final scheduled = now.add(const Duration(seconds: 15)); // بعد 15 ثانية
+//     final now = DateTime.now();
+//     final scheduled = now.add(Duration(seconds: 10));
+//     final tzScheduled = tz.TZDateTime.from(scheduled, tz.local);
+
+//     print('📆 سيتم إصدار الإشعار عند: $tzScheduled');
+
+//     await flutterLocalNotificationsPlugin.zonedSchedule(
+//       999,
+//       '🚨 اختبار جدولة',
+//       'هل سيظهر هذا الإشعار بعد 10 ثواني؟',
+//       tz.TZDateTime.from(scheduled, tz.local),
+//       NotificationDetails(
+//         android: AndroidNotificationDetails(
+//           'test_channel',
+//           'اختبار',
+//           channelDescription: 'تجربة إشعار مجدول',
+//           importance: Importance.max,
+//           priority: Priority.high,
+//         ),
+//       ),
+//       androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
+//       uiLocalNotificationDateInterpretation:
+//           UILocalNotificationDateInterpretation.absoluteTime,
+//     );
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(title: const Text('🔔 إشعار مؤقت')),
+//       body: Center(
+//         child: ElevatedButton(
+//           onPressed: _scheduleNotification,
+//           child: const Text('جدولة إشعار بعد 15 ثانية'),
+//         ),
+//       ),
+//     );
+//   }
+// }
